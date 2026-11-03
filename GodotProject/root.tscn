@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://s605fxgbwhn7"]
+
+[ext_resource type="Script" uid="uid://btp8sovudj0jx" path="res://scripts/root.gd" id="1_pq8q7"]
+
+[node name="Root" type="Node" unique_id=458700738 node_paths=PackedStringArray("file_dialog", "accept_dialog", "choose_in_dir", "ui")]
+script = ExtResource("1_pq8q7")
+file_dialog = NodePath("FileDialog")
+accept_dialog = NodePath("AcceptDialog")
+choose_in_dir = NodePath("UI/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/ChooseInDir")
+ui = NodePath("UI")
+
+[node name="UI" type="Control" parent="." unique_id=252139512]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="UI" unique_id=737075078]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI" unique_id=1677536138]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+
+[node name="Label" type="Label" parent="UI/VBoxContainer" unique_id=230834005]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Image Helper"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/VBoxContainer" unique_id=2018149822]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/VBoxContainer/PanelContainer" unique_id=1660179398]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/VBoxContainer/PanelContainer/MarginContainer" unique_id=1549329047]
+layout_mode = 2
+
+[node name="ChooseInDir" type="Button" parent="UI/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=665219832]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Choose directory"
+
+[node name="Button" type="Button" parent="UI/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=793761403]
+layout_mode = 2
+text = "Continue"
+
+[node name="exit" type="Button" parent="UI/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=121108739]
+layout_mode = 2
+text = "Exit"
+
+[node name="FileDialog" type="FileDialog" parent="." unique_id=608531785]
+oversampling_override = 1.0
+title = "Open a Directory"
+initial_position = 2
+file_mode = 2
+access = 2
+use_native_dialog = true
+
+[node name="AcceptDialog" type="AcceptDialog" parent="." unique_id=603509289]
+oversampling_override = 1.0
+title = "Error"
+initial_position = 2
+size = Vector2i(485, 106)
+dialog_text = "A directory must be selected before proceeding."
+dialog_autowrap = true
+
+[connection signal="pressed" from="UI/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/ChooseInDir" to="." method="_on_choose_dir_pressed"]
+[connection signal="pressed" from="UI/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="UI/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/exit" to="." method="_on_exit_pressed"]

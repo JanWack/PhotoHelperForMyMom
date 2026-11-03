@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://bvuxtixpgnxy0"]
+
+[ext_resource type="Script" uid="uid://umxweum01rg6" path="res://scripts/img.gd" id="1_crskw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1fttx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_crskw"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="TextureRect" type="TextureRect" unique_id=1432908667 node_paths=PackedStringArray("button", "selected_indicator")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+expand_mode = 5
+stretch_mode = 5
+script = ExtResource("1_crskw")
+button = NodePath("Button")
+selected_indicator = NodePath("Button/PanelContainer")
+
+[node name="Button" type="Button" parent="." unique_id=602042199]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1fttx")
+
+[node name="PanelContainer" type="PanelContainer" parent="Button" unique_id=1297973871]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_crskw")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

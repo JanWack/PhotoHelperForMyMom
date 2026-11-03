@@ -1,0 +1,287 @@
+[gd_scene format=3 uid="uid://dlpxqtbgq11pt"]
+
+[ext_resource type="Script" uid="uid://cl8usnafvldjh" path="res://scripts/image_handler.gd" id="1_ru1wp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qr4vf"]
+bg_color = Color(0, 1, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ru1wp"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="ImageHandler" type="Node" unique_id=1394452686 node_paths=PackedStringArray("input_images", "keep_list", "preiev", "scroll_container", "discard", "keep", "revert", "save_destination", "current_loaded", "total_images", "confirmation_dialog", "file_dialog", "accept_dialog", "go_back", "done", "thread_warning", "status", "continue_button", "progress_bar")]
+script = ExtResource("1_ru1wp")
+input_images = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer/PanelContainer/MarginContainer/InList")
+keep_list = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/ScrollContainer2/PanelContainer/MarginContainer/KeepList")
+preiev = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/Preiev")
+scroll_container = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer")
+discard = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Discard")
+keep = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Keep")
+revert = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Revert")
+save_destination = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/SaveDestination")
+current_loaded = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer2/CurrentLoaded")
+total_images = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer2/TotalImages")
+confirmation_dialog = NodePath("ConfirmationDialog")
+file_dialog = NodePath("FileDialog")
+accept_dialog = NodePath("AcceptDialog")
+go_back = NodePath("GoBack")
+done = NodePath("Done")
+thread_warning = NodePath("ThreadWarning")
+status = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer2/Status")
+continue_button = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/Continue")
+progress_bar = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer2/ProgressBar")
+
+[node name="Control" type="Control" parent="." unique_id=323795617]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control" unique_id=629853711]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="Control" unique_id=309114797]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer" unique_id=224730334]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer" unique_id=1528886982]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1276108175]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 32
+text = "Image Helper"
+
+[node name="CurrentLoaded" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=384851624]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "0"
+
+[node name="Label2" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=165639314]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "/"
+
+[node name="TotalImages" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=2087354561]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "0"
+
+[node name="Status" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=657039459]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Images loaded"
+
+[node name="ProgressBar" type="ProgressBar" parent="Control/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=684671541]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/fill = SubResource("StyleBoxFlat_qr4vf")
+step = 1.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer" unique_id=562787366]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1807290365]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Button" type="Button" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1860520571]
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
+theme_override_styles/disabled = SubResource("StyleBoxFlat_ru1wp")
+disabled = true
+text = "Input:"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=354135486]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+theme_override_constants/scrollbar_h_separation = 4
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer" unique_id=956177343]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer/PanelContainer" unique_id=1774037579]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="InList" type="VBoxContainer" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer/PanelContainer/MarginContainer" unique_id=699935543]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="Back" type="Button" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1318083719]
+layout_mode = 2
+text = "Back"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1214730742]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=562556937]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Preiev" type="TextureRect" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer" unique_id=1497898235]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=2127267425]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Discard" type="Button" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1926249630]
+layout_mode = 2
+text = " Discard "
+
+[node name="Keep" type="Button" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=574075262]
+layout_mode = 2
+text = " Keep "
+
+[node name="Revert" type="Button" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=430847763]
+layout_mode = 2
+text = " Revert "
+
+[node name="SaveTo" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1077379218]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Save to:"
+
+[node name="SaveDestination" type="Button" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=2142513465]
+layout_mode = 2
+size_flags_horizontal = 8
+text = " Select save destination "
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Control/MarginContainer/VBoxContainer/HBoxContainer" unique_id=526957801]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Button" type="Button" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3" unique_id=1892811841]
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
+theme_override_styles/disabled = SubResource("StyleBoxFlat_ru1wp")
+disabled = true
+text = "Output:"
+
+[node name="ScrollContainer2" type="ScrollContainer" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3" unique_id=301032599]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/ScrollContainer2" unique_id=1853149085]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/ScrollContainer2/PanelContainer" unique_id=768588466]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="KeepList" type="VBoxContainer" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/ScrollContainer2/PanelContainer/MarginContainer" unique_id=1944527970]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="Continue" type="Button" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3" unique_id=737319675]
+layout_mode = 2
+disabled = true
+text = "Continue"
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="." unique_id=870462793]
+oversampling_override = 1.0
+title = "Confirm..."
+initial_position = 2
+
+[node name="FileDialog" type="FileDialog" parent="." unique_id=767505752]
+oversampling_override = 1.0
+title = "Open a Directory"
+file_mode = 2
+access = 2
+use_native_dialog = true
+
+[node name="AcceptDialog" type="AcceptDialog" parent="." unique_id=393338042]
+oversampling_override = 1.0
+initial_position = 2
+size = Vector2i(765, 100)
+dialog_text = "You need to choose where to save your images before you can continue (select save destination)."
+
+[node name="GoBack" type="ConfirmationDialog" parent="." unique_id=1365370161]
+oversampling_override = 1.0
+initial_position = 2
+size = Vector2i(281, 106)
+dialog_text = "Are you sure you want to go back?
+Your progress will be lost."
+
+[node name="Done" type="AcceptDialog" parent="." unique_id=77996096]
+oversampling_override = 1.0
+title = "Done!"
+initial_position = 2
+size = Vector2i(571, 106)
+dialog_text = "Images were saved in: "
+dialog_close_on_escape = false
+
+[node name="ThreadWarning" type="ConfirmationDialog" parent="." unique_id=107905953]
+oversampling_override = 1.0
+initial_position = 2
+ok_button_text = "Yes"
+dialog_text = "Images are still loading! Stop loading and proceed?"
+cancel_button_text = "No"
+
+[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Discard" to="." method="_on_discard_pressed"]
+[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Keep" to="." method="_on_keep_pressed"]
+[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Revert" to="." method="_on_revert_pressed"]
+[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/SaveDestination" to="." method="_on_save_destination_pressed"]
+[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/Continue" to="." method="_on_cocntinue_pressed"]
