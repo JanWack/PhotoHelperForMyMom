@@ -21,9 +21,10 @@ func parse_images(input_images: VBoxContainer) -> void:
 func load_images(input_images: VBoxContainer) -> void:
 	var dir: DirAccess = DirAccess.open(Global.in_dir_name)
 	if dir:
+		var image_extensions := ["png", "jpg", "jpeg"]
 		dir.list_dir_begin()
 		for file: StringName in dir.get_files():
-			if file.contains(".jpg") or file.contains(".JPG") or file.contains(".png") or file.contains(".PNG") or file.contains(".jpeg") or file.contains(".JPEG"):
+			if file.get_extension().to_lower() in image_extensions:
 				var img_path: StringName = str(dir.get_current_dir() + "/" + file)
 				var img: Image = Image.new()
 				var texture_rect: CustomTextureRect = img_scene.instantiate()

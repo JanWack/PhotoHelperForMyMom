@@ -57,7 +57,8 @@ var current_img: CustomTextureRect:
 
 
 func _exit_tree() -> void:
-	custom_thread.wait_to_finish()
+	if custom_thread.is_started():
+		custom_thread.wait_to_finish()
 
 
 # Called when the node enters the scene tree for the first time.
@@ -81,9 +82,13 @@ func _ready() -> void:
 				current_img = img_texture
 	)
 	
-	setup_progress_bar()
-	
-	custom_thread.parse_images(input_images)
+	var parse: bool = setup_progress_bar()
+	if parse:
+		custom_thread.parse_images(input_images)
+	else:
+		done.title = "No Images Found"
+		done.dialog_text = "No Images were found in the selected directory."
+		done.popup()
 
 
 func out_dir_selected(n: String) -> void:
@@ -98,12 +103,20 @@ func update_progress_bar() -> void:
 		progress_bar.hide()
 
 
-func setup_progress_bar() -> void:
+func setup_progress_bar() -> bool:
+	var n: int = 0
 	var dir: DirAccess = DirAccess.open(Global.in_dir_name)
 	if dir:
-		var n: int = dir.get_files().size()
-		progress_bar.max_value = n
-		total_images.text = str(n)
+		var image_extensions := ["png", "jpg", "jpeg"]
+		for file: StringName in dir.get_files():
+			if file.get_extension().to_lower() in image_extensions:
+				n += 1
+				progress_bar.max_value = n
+				total_images.text = str(n)
+	if n == 0:
+		return false
+	else:
+		return true
 
 
 func save_images() -> void:
