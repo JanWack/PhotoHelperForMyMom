@@ -56,6 +56,12 @@ var current_img: CustomTextureRect:
 		return current_img
 
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		if custom_thread.is_alive():
+			custom_thread.stop() 
+
+
 func _exit_tree() -> void:
 	if custom_thread.is_started():
 		custom_thread.wait_to_finish()

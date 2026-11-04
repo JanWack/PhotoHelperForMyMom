@@ -10,24 +10,24 @@ extends Node
 func _ready() -> void:
 	file_dialog.dir_selected.connect(
 		func(n: String):
-			Global.in_dir_name = n
-			choose_in_dir.text = n
+			if n != "":
+				Global.in_dir_name = n
+				choose_in_dir.text = n
+				var next_scene: PackedScene = load("res://image_handler.tscn")
+				get_tree().change_scene_to_packed(next_scene)
+			else:
+				accept_dialog.popup()
 	)
 	
+	ui.position.y += 200
 	var tween: Tween = get_tree().create_tween()
-	tween.tween_property(ui, "modulate", Color.WHITE, 1.0).set_ease(Tween.EASE_OUT)
+	tween.set_parallel(true)
+	tween.tween_property(ui, "modulate", Color.WHITE, 0.8).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(ui, "position", Vector2(0.0, 0.0), 0.8).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
 
 func _on_choose_dir_pressed() -> void:
 	file_dialog.popup()
-
-
-func _on_button_pressed() -> void:
-	if Global.in_dir_name != "":
-		var next_scene: PackedScene = load("res://image_handler.tscn")
-		get_tree().change_scene_to_packed(next_scene)
-	else:
-		accept_dialog.popup()
 
 
 func _on_exit_pressed() -> void:

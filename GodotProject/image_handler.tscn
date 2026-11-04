@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dlpxqtbgq11pt"]
 
 [ext_resource type="Script" uid="uid://cl8usnafvldjh" path="res://scripts/image_handler.gd" id="1_ru1wp"]
+[ext_resource type="StyleBox" uid="uid://dwineisix0ud8" path="res://scary_btn.tres" id="2_qr4vf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qr4vf"]
 bg_color = Color(0, 1, 0, 1)
@@ -20,6 +21,17 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_avmvs"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 1, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [node name="ImageHandler" type="Node" unique_id=1394452686 node_paths=PackedStringArray("input_images", "keep_list", "preiev", "scroll_container", "discard", "keep", "revert", "save_destination", "current_loaded", "total_images", "confirmation_dialog", "file_dialog", "accept_dialog", "go_back", "done", "thread_warning", "status", "continue_button", "progress_bar")]
 script = ExtResource("1_ru1wp")
@@ -180,10 +192,14 @@ theme_override_constants/separation = 16
 
 [node name="Discard" type="Button" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1926249630]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = ExtResource("2_qr4vf")
 text = " Discard "
 
 [node name="Keep" type="Button" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=574075262]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_avmvs")
 text = " Keep "
 
 [node name="Revert" type="Button" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=430847763]
