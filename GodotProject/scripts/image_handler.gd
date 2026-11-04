@@ -4,7 +4,7 @@ signal continue_and_stop_thread(cont: bool)
 
 @export var input_images: VBoxContainer
 @export var keep_list: VBoxContainer
-@export var preiev: TextureRect
+@export var preview: TextureRect
 @export var scroll_container: ScrollContainer
 @export var discard: Button
 @export var keep: Button
@@ -32,7 +32,7 @@ var current_img: CustomTextureRect:
 		if not img:
 			if current_img:
 				current_img.selected_indicator.hide()
-			preiev.texture = null
+			preview.texture = null
 			discard.disabled = true
 			keep.disabled = true
 			revert.disabled = true
@@ -71,22 +71,15 @@ func _exit_tree() -> void:
 func _ready() -> void:
 	current_img = null
 	
+	# Connect signals
 	done.confirmed.connect(exit_to_menu)
 	go_back.confirmed.connect(exit_to_menu)
 	confirmation_dialog.confirmed.connect(save_images)
 	thread_warning.canceled.connect(func(): continue_and_stop_thread.emit(false))
 	thread_warning.confirmed.connect(func(): continue_and_stop_thread.emit(true))
-	Global.loaded.connect(update_progress_bar)
 	file_dialog.dir_selected.connect(out_dir_selected)
-	
-	Global.preview_img.connect(
-		func(img_texture: CustomTextureRect):
-			if img_texture != current_img:
-				var img: Image = Image.new()
-				img.load(img_texture.img_path)
-				preiev.texture = ImageTexture.create_from_image(img)
-				current_img = img_texture
-	)
+	Global.loaded.connect(update_progress_bar)
+	Global.preview_img.connect(preview_image)
 	
 	var parse: bool = setup_progress_bar()
 	if parse:
@@ -123,6 +116,20 @@ func setup_progress_bar() -> bool:
 		return false
 	else:
 		return true
+
+
+func preview_image(img_obj: CustomTextureRect) -> void:
+	if img_obj != current_img:
+		var img: Image = Image.new()
+		var tween: Tween = get_tree().create_tween()
+		
+		preview.modulate = Color.BLACK
+		
+		img.load(img_obj.img_path)
+		preview.texture = ImageTexture.create_from_image(img)
+		current_img = img_obj
+		
+		tween.tween_property(preview, "modulate", Color.WHITE, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
 
 func save_images() -> void:

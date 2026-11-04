@@ -33,11 +33,11 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[node name="ImageHandler" type="Node" unique_id=1394452686 node_paths=PackedStringArray("input_images", "keep_list", "preiev", "scroll_container", "discard", "keep", "revert", "save_destination", "current_loaded", "total_images", "confirmation_dialog", "file_dialog", "accept_dialog", "go_back", "done", "thread_warning", "status", "continue_button", "progress_bar")]
+[node name="ImageHandler" type="Node" unique_id=1394452686 node_paths=PackedStringArray("input_images", "keep_list", "preview", "scroll_container", "discard", "keep", "revert", "save_destination", "current_loaded", "total_images", "confirmation_dialog", "file_dialog", "accept_dialog", "go_back", "done", "thread_warning", "status", "continue_button", "progress_bar")]
 script = ExtResource("1_ru1wp")
 input_images = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer/PanelContainer/MarginContainer/InList")
 keep_list = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/ScrollContainer2/PanelContainer/MarginContainer/KeepList")
-preiev = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/Preiev")
+preview = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/Preiev")
 scroll_container = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer")
 discard = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Discard")
 keep = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Keep")

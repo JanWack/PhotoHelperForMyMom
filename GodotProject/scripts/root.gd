@@ -19,11 +19,11 @@ func _ready() -> void:
 				accept_dialog.popup()
 	)
 	
-	ui.position.y += 200
+	ui.position.y += 100
 	var tween: Tween = get_tree().create_tween()
 	tween.set_parallel(true)
-	tween.tween_property(ui, "modulate", Color.WHITE, 0.8).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	tween.tween_property(ui, "position", Vector2(0.0, 0.0), 0.8).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(ui, "modulate", Color.WHITE, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(ui, "position", Vector2(0.0, 0.0), 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
 
 func _on_choose_dir_pressed() -> void:
