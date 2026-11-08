@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dlpxqtbgq11pt"]
 
 [ext_resource type="Script" uid="uid://cl8usnafvldjh" path="res://scripts/image_handler.gd" id="1_ru1wp"]
+[ext_resource type="Script" uid="uid://j7mn7c02cct4" path="res://scripts/zoom.gd" id="2_avmvs"]
 [ext_resource type="StyleBox" uid="uid://dwineisix0ud8" path="res://scary_btn.tres" id="2_qr4vf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qr4vf"]
@@ -37,7 +38,7 @@ corner_radius_bottom_left = 3
 script = ExtResource("1_ru1wp")
 input_images = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer/PanelContainer/MarginContainer/InList")
 keep_list = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/ScrollContainer2/PanelContainer/MarginContainer/KeepList")
-preview = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/Preiev")
+preview = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/Control/Preview")
 scroll_container = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer")
 discard = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Discard")
 keep = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Keep")
@@ -179,8 +180,27 @@ theme_override_constants/separation = 16
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Preiev" type="TextureRect" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer" unique_id=1497898235]
+[node name="Control" type="Control" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer" unique_id=1753951601 node_paths=PackedStringArray("preview")]
+clip_contents = true
 layout_mode = 2
+mouse_filter = 2
+mouse_default_cursor_shape = 13
+script = ExtResource("2_avmvs")
+preview = NodePath("Preview")
+
+[node name="Preview" type="TextureRect" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/Control" unique_id=1497898235]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -384.0
+offset_top = -254.0
+offset_right = 384.0
+offset_bottom = 254.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 expand_mode = 1
