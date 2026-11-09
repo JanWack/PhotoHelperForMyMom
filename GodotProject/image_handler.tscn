@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dlpxqtbgq11pt"]
 
 [ext_resource type="Script" uid="uid://cl8usnafvldjh" path="res://scripts/image_handler.gd" id="1_ru1wp"]
+[ext_resource type="Script" uid="uid://j7mn7c02cct4" path="res://scripts/zoom.gd" id="2_avmvs"]
 [ext_resource type="StyleBox" uid="uid://dwineisix0ud8" path="res://scary_btn.tres" id="2_qr4vf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qr4vf"]
@@ -37,7 +38,7 @@ corner_radius_bottom_left = 3
 script = ExtResource("1_ru1wp")
 input_images = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer/PanelContainer/MarginContainer/InList")
 keep_list = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/ScrollContainer2/PanelContainer/MarginContainer/KeepList")
-preview = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/Preiev")
+preview = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/Control/PreviewPanel/Preview")
 scroll_container = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer")
 discard = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Discard")
 keep = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Keep")
@@ -179,7 +180,24 @@ theme_override_constants/separation = 16
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Preiev" type="TextureRect" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer" unique_id=1497898235]
+[node name="Control" type="Control" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer" unique_id=1753951601 node_paths=PackedStringArray("preview", "preview_panel")]
+clip_contents = true
+layout_mode = 2
+mouse_filter = 2
+mouse_default_cursor_shape = 13
+script = ExtResource("2_avmvs")
+preview = NodePath("PreviewPanel/Preview")
+preview_panel = NodePath("PreviewPanel")
+
+[node name="PreviewPanel" type="PanelContainer" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/Control" unique_id=1505568084]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Preview" type="TextureRect" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/Control/PreviewPanel" unique_id=1497898235]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -296,6 +314,7 @@ dialog_text = "Images are still loading! Stop loading and proceed?"
 cancel_button_text = "No"
 
 [connection signal="pressed" from="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Back" to="." method="_on_back_pressed"]
+[connection signal="mouse_exited" from="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/Control/PreviewPanel" to="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/Control" method="_on_mouse_exited"]
 [connection signal="pressed" from="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Discard" to="." method="_on_discard_pressed"]
 [connection signal="pressed" from="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Keep" to="." method="_on_keep_pressed"]
 [connection signal="pressed" from="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Revert" to="." method="_on_revert_pressed"]
