@@ -27,6 +27,8 @@ var img_scene: PackedScene = preload("res://img.tscn")
 
 var custom_thread: CustomThread = preload("res://scripts/img_thread.gd").new()
 
+var tween: Tween
+
 var current_img: CustomTextureRect:
 	set(img):
 		if not img:
@@ -121,15 +123,15 @@ func setup_progress_bar() -> bool:
 func preview_image(img_obj: CustomTextureRect) -> void:
 	if img_obj != current_img:
 		var img: Image = Image.new()
-		var tween: Tween = get_tree().create_tween()
+		tween = get_tree().create_tween()
 		
-		preview.modulate = Color.BLACK
+		preview.self_modulate = Color.TRANSPARENT
 		
 		img.load(img_obj.img_path)
 		preview.texture = ImageTexture.create_from_image(img)
 		current_img = img_obj
 		
-		tween.tween_property(preview, "modulate", Color.WHITE, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		tween.tween_property(preview, "self_modulate", Color.WHITE, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
 
 func save_images() -> void:

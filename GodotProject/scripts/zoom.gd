@@ -6,16 +6,7 @@ extends Control
 var tween: Tween
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	Global.preview_img.connect(
-		func(_img: CustomTextureRect):
-			preview_panel.position = Vector2.ZERO
-			preview_panel.scale = Vector2.ONE
-	)
-
-
-func _unhandled_input(event: InputEvent) -> void:
+func _unhandled_input(_event: InputEvent) -> void:
 	var mouse_pos: Vector2 = preview_panel.get_local_mouse_position()
 	if self.get_rect().has_point(mouse_pos):
 		if Input.is_action_just_pressed("zoom_in"):
