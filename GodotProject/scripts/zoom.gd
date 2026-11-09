@@ -1,60 +1,45 @@
 extends Control
 
 @export var preview: TextureRect
+@export var preview_panel: PanelContainer
 
-var edges: Array[Vector2]
+var tween: Tween
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	edges.resize(4)
-	
 	Global.preview_img.connect(
 		func(_img: CustomTextureRect):
-			preview.position = Vector2.ZERO
-			preview.scale = Vector2.ONE
-			calculate_edges()
+			preview_panel.position = Vector2.ZERO
+			preview_panel.scale = Vector2.ONE
 	)
 
 
-func _unhandled_input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("zoom_in"):
-		if preview.scale != Vector2(4.0, 4.0):
-			preview.pivot_offset = get_local_mouse_position()
-			preview.scale *= 1.1
-			preview.scale = clamp(preview.scale, Vector2.ONE, Vector2(4.0, 4.0))
-			calculate_edges()
-	elif Input.is_action_just_pressed("zoom_out"):
-		preview.scale *= 0.9
-		preview.scale = clamp(preview.scale, Vector2.ONE, Vector2(4.0, 4.0))
-		calculate_edges()
+func _unhandled_input(event: InputEvent) -> void:
+	var mouse_pos: Vector2 = preview_panel.get_local_mouse_position()
+	if self.get_rect().has_point(mouse_pos):
+		if Input.is_action_just_pressed("zoom_in"):
+			if preview_panel.scale != Vector2(4.0, 4.0):
+				preview_panel.scale *= 1.1
+				preview_panel.scale = clamp(preview_panel.scale, Vector2.ONE, Vector2(4.0, 4.0))
+		elif Input.is_action_just_pressed("zoom_out"):
+			preview_panel.scale *= 0.9
+			preview_panel.scale = clamp(preview_panel.scale, Vector2.ONE, Vector2(4.0, 4.0))
+			if preview_panel.scale == Vector2.ONE:
+				preview_panel.position = Vector2.ZERO
 
 
 func _input(event: InputEvent) -> void:
-	if Input.is_action_pressed("grab"):
-		if event is InputEventMouseMotion:
-			preview.position += event.relative
+	if event is InputEventMouseMotion:
+		var mouse_pos: Vector2 = preview_panel.get_local_mouse_position()
+		if self.get_rect().has_point(mouse_pos):
+			preview_panel.pivot_offset = preview_panel.get_local_mouse_position()
 
 
-func calculate_edges() -> void:
-	for i in 4:
-		match i:
-			0:
-				edges[0] = preview.global_position
-			1:
-				edges[1] = Vector2(preview.global_position.x, preview.global_position.y + preview.size.y)
-			2:
-				edges[2] = Vector2(preview.global_position.x + preview.size.x, preview.global_position.y + preview.size.y)
-			3:
-				edges[3] = Vector2(preview.global_position.x + preview.size.x, preview.global_position.y)
-	
-	fix_zoom()
-
-
-func fix_zoom() -> void:
-	print(edges)
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
+func _on_mouse_exited() -> void:
+	if tween and tween.is_running():
+		tween.kill()
+	tween = get_tree().create_tween()
+	tween.tween_property(preview_panel, "position", Vector2.ZERO, 0.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.set_parallel()
+	tween.tween_property(preview_panel, "scale", Vector2.ONE, 0.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
